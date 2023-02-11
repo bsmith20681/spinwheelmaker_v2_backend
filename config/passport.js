@@ -7,7 +7,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5000/auth/google/redirect",
+        callbackURL: process.env.GOOGLE_REDIRECT_URL,
       },
       function (accessToken, refreshToken, profile, cb) {
         console.log(profile);

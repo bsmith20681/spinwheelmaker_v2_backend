@@ -46,30 +46,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:5000/auth/google/redirect",
-    },
-    function (accessToken, refreshToken, profile, cb) {
-      console.log(profile);
-      User.findOrCreate(
-        {
-          googleId: profile.id,
-          picture: profile.photos[0].value,
-          email: profile.emails[0].value,
-          first_name: profile.name.givenName,
-          last_name: profile.name.familyName,
-        },
-        function (err, user) {
-          return cb(err, user);
-        }
-      );
-    }
-  )
-);
+require("./config/passport");
 
 function isUserAuthenticated(req, res, next) {
   if (req.user) {
