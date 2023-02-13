@@ -10,7 +10,6 @@ module.exports = function (passport) {
         callbackURL: process.env.GOOGLE_REDIRECT_URL,
       },
       function (accessToken, refreshToken, profile, cb) {
-        console.log(profile);
         User.findOrCreate(
           {
             googleId: profile.id,
@@ -28,12 +27,10 @@ module.exports = function (passport) {
   );
 
   passport.serializeUser((user, done) => {
-    console.log("serialized user");
     done(null, user);
   });
 
   passport.deserializeUser((id, done) => {
-    console.log("deseralized user");
     User.findById(id).then((user) => {
       done(null, user);
     });

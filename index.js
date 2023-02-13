@@ -7,10 +7,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./database/db");
 const cookieParser = require("cookie-parser");
-const spinWheel = require("./routes/spinwheel");
+
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passport = require("passport");
 
 dotenv.config({ path: "./config/config.env" });
@@ -30,8 +29,10 @@ app.use(cookieParser());
 app.use(cors());
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Credentials", "true");
+
   res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -57,8 +58,9 @@ function isUserAuthenticated(req, res, next) {
 }
 
 //Routes
-app.use("/api/v1/spinwheel", spinWheel);
+app.use("/api/v1/spinwheel", require("./routes/spinwheel"));
 app.use("/api/v1/auth", require("./routes/auth"));
+app.use("/api/v1/user", require("./routes/user"));
 
 const PORT = process.env.PORT || 5000;
 
