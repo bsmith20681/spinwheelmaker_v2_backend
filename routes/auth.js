@@ -13,13 +13,15 @@ router.get(
 
 // The middleware receives the data from Google and runs the function on Strategy config
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  res.send("<script>window.close()</script>");
+  res.redirect(process.env.CLIENT_URL);
 });
 
 // Logout route
 router.get("/logout", (req, res) => {
-  req.logout();
-  res.redirect("/");
+  if (req.user) {
+    req.logout();
+    res.send("success");
+  }
 });
 
 module.exports = router;
