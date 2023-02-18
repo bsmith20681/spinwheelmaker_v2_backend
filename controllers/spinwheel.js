@@ -28,6 +28,7 @@ exports.getSpinWheel = async (req, res) => {
 // @route     POST /api/v1/spinwheel
 // @access    Public
 exports.createSpinWheel = async (req, res) => {
+  console.log(req);
   try {
     const spinWheel = await SpinWheel.create(req.body);
     res.status(201).json({

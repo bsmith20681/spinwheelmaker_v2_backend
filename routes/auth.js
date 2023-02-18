@@ -20,6 +20,9 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
 router.get("/logout", (req, res) => {
   if (req.user) {
     req.logout();
+    res.status(200).clearCookie("connect.sid", {
+      path: "/",
+    });
     res.send("success");
   }
 });

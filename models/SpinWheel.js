@@ -17,6 +17,10 @@ const SpinWheelSchema = new mongoose.Schema({
   segments: {
     type: Array,
   },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
