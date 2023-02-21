@@ -4,19 +4,18 @@ const mongoose = require("mongoose");
 /* then when you edit it save the number plus one /63d82cc2da359ac7e40b384a/1/ */
 
 const SpinWheelSchema = new mongoose.Schema({
-  title: {
-    type: String,
-  },
   shortID: {
     type: String,
   },
-  iteration: {
-    type: Number,
-    default: 0,
-  },
-  segments: {
-    type: Array,
-  },
+  iteration: [
+    {
+      title: {
+        type: String,
+      },
+      segments: [],
+    },
+  ],
+
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
