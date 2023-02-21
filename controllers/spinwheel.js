@@ -24,6 +24,19 @@ exports.getSpinWheel = async (req, res) => {
   }
 };
 
+// @desc      Get all SpinWheel created by logged in user
+// @route     GET /api/v1/spinwheel
+// @access    Private
+exports.getAllUserCreatedSpinWheel = async (req, res) => {
+  try {
+    console.log(req.user);
+    const spinWheels = await SpinWheel.find({ user: req.user._id }).sort({ date: -1 });
+    res.status(200).json({ success: true, data: spinWheels });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 // @desc      Publish a SpinWheel
 // @route     POST /api/v1/spinwheel
 // @access    Public
