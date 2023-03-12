@@ -21,12 +21,12 @@ router.get(
 
 // The middleware receives the data from Google and runs the function on Strategy config
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  res.redirect(process.env.CLIENT_URL);
+  res.send("<script>window.close()</script>");
 });
 
 // The middleware receives the data from Google and runs the function on Strategy config
 router.get("/facebook/redirect", passport.authenticate("facebook"), (req, res) => {
-  res.redirect(process.env.CLIENT_URL);
+  res.send("<script>window.close()</script>");
 });
 
 // Logout route

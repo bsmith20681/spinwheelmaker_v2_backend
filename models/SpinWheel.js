@@ -7,6 +7,9 @@ const SpinWheelSchema = new mongoose.Schema({
   shortID: {
     type: String,
   },
+  settings: {
+    type: mongoose.Schema.Types.Mixed,
+  },
   iteration: [
     {
       title: {

@@ -66,6 +66,7 @@ exports.createSpinWheel = async (req, res) => {
     });
     console.log(spinWheel);
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: err.message });
   }
 };
