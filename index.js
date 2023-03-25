@@ -32,7 +32,6 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", `${process.env.CLIENT_URL}`);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
   res.header("Access-Control-Allow-Credentials", "true");
-
   res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -41,6 +40,9 @@ app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [process.env.COOKIE_KEY],
+    secure: true,
+    domain: "https://spinwheelmaker2.netlify.app",
+    sameSite: "none",
   })
 );
 
